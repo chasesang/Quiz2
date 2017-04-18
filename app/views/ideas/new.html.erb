@@ -1,0 +1,18 @@
+<h1>this is supposed to be poped window. </h1>
+
+<%= @idea.errors.full_messages.join(', ') %>
+<%= form_for @idea do |f| %>
+
+<div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+</div>
+<div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+</div>
+
+
+<%= f.submit %>
+
+<% end %>

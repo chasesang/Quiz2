@@ -1,0 +1,33 @@
+<h1><%= @idea.title %></h1>
+<p><%= @idea.body %></p>
+
+<p><%= @idea.user.first_name %></p>
+<% if can? :edit, @idea %>
+<%= link_to 'Edit', edit_idea_path(@idea) %>
+<% end %>
+<% if can? :destroy, @idea %>
+<%= link_to 'Delete', idea_path(@idea),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+
+
+<h2>Reviews</h2>
+<%= @review.errors.full_messages.join(', ') %>
+<%= form_for [@idea, @review] do |f| %>
+  <%= f.text_area :body %>
+
+  <%= f.submit %>
+<% end %>
+<hr>
+
+<% @idea.reviews.each do |review| %>
+<p>Review:<%= review.body %></p>
+<p><%= review.user.first_name %></p>
+<% if can? :destroy, review %>
+<%= link_to 'Delete', idea_review_path(@idea, review),
+method: :delete,
+data: { confirm: 'Are you sure?'} %>
+<% end %>
+<% end %>
