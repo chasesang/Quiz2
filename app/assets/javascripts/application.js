@@ -14,3 +14,17 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require_tree .
+
+let hider = true
+$(document).ready(function() {
+  $('.idea_title').on('click', function(event){
+    if(hider === true){
+      $(event.currentTarget).next().removeClass('hide');
+      hider = false;
+    }
+    else{
+      $(event.currentTarget).next().addClass('hide');
+      hider = true;
+    }
+  })
+});

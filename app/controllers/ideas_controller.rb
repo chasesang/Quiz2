@@ -2,13 +2,14 @@ class IdeasController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   def index
     @ideas = Idea.last(20)
+    @newidea = Idea.new
 
   end
 
-
-  def new
-    @idea = Idea.new
-  end
+  #
+  # def new
+  #   @idea = Idea.new
+  # end
 
   def create
 
@@ -18,13 +19,14 @@ class IdeasController < ApplicationController
     if @idea.save
       redirect_to ideas_path
     else
-      render :new
+      render :index
     end
   end
 
   def show
     @idea = Idea.find params[:id]
     @review = Review.new
+    @like = @idea.like_for(current_user)
   end
 
   def destroy

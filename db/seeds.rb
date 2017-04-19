@@ -23,8 +23,8 @@
 20.times do
   user = User.all.sample
 
-  Idea.create({ title: Faker::Friends.character,
-  body: Faker::Lorem.paragraph,
+  Idea.create({ title: Faker::Hipster.word,
+  body: Faker::Lorem.paragraph(2),
   user_id: user.id
     })
   end
@@ -42,9 +42,19 @@ ideas.each do |idea|
   end
 end
 
+# create likes
+100.times do
+  Like.create({
+  idea: Idea.all.sample,
+  user: User.all.sample
+  })
+end
+
 ideas_count = Idea.count
 reviews_count = Review.count
+likes_count = Like.count
 
 
 puts Cowsay.say "Created #{ideas_count}", :cow
 puts Cowsay.say "Created #{reviews_count}", :cow
+puts Cowsay.say "Created #{likes_count}", :cow

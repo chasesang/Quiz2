@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :sessions, only:[:new, :create] do
      delete :destroy, on: :collection
    end
-
+  resources :ideas do
+    resources :likes, only: [:create, :destroy]
+  end
   root 'ideas#index'
 
 end
